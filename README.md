@@ -12,10 +12,10 @@ The SDK can be used as a C Style API built on top of the OO code. For this, incl
 Initialization of the SDK essentially allocates the necessary resources for the current session e.g., a TCP/IP connection with the simualtor. The session must be closed e.g., on program exist by uninitializing the SDK. The methods for initialization and uninitialization are presented as follows.
 
 ```c++
-\* initializes the required resource e.g., connection with the simulator *\
+/* initializes the required resource e.g., connection with the simulator */
 void SHAPI_Initialize();
 
-\* free up the resources e.g., by disconnecting from the simulator *\
+/* free up the resources e.g., by disconnecting from the simulator */
 void SHAPI_Dispose();
 ```
 
@@ -23,16 +23,16 @@ void SHAPI_Dispose();
 The dynamic layout and hierarchical nature of the SmartHome requires a method for enumeration of various entities. For example, we might need to find out how many devices are in a particular room of a particular floor. Also, the dynamic layout of the simulator allows changing the number of floors and number of room on each floor. We can use the following method to perform enumeration requests.
 
 ```c++
-\* get how many floors are in the SmartHome *\
+/* get how many floors are in the SmartHome */
 int SHAPI_GetFloorCount();
 
-\* get how many room are in the given floor number *\
+/* get how many room are in the given floor number */
 int SHAPI_GetRoomCount(int floorNumber);
 
-\* get how many devices are there in the given room of the given floor number *\
+/* get how many devices are there in the given room of the given floor number */
 int SHAPI_GetDeviceCount(int floorNumber, int roomNumber);
 
-\* get how many devices are paired with the device identified by device id *\
+/* get how many devices are paired with the device identified by device id */
 int SHAPI_GetPairedDevicesCount(int deviceId);
 ```
 
