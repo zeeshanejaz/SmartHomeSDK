@@ -18,16 +18,16 @@ A floor is uniquely identified by it floor number, which is unique in the buildi
 A room is also a named entity e.g., it can have a name *Living Room*. A room must be accessed by it number, which is only unique on its floor. Therefore, a room must be identified using both its floor number and its room number.
 
 ### Device
-A room can have many devices. A device has a type e.g., bulb, air conditioner, window, CD player, and is uniquely identified by its integer Device ID. A device can have many capabilities like ```CommandEnabled``` ```TextEnabled``` and ```SafetyRelated```. All devices can be powered on or off if they are currently online. A ```CommandEnabled``` device is capable of accepting numerical commands e.g., 0-n where each command is mapped to a certain functionality of the device. For example, a window is a command enabled device and accepts 2 commands for opening and closing respectively. A ```TextEnabled``` command is capable of returning human readable status messages e.g., the CD player can return the name of the current track being played. A ```SafetyRelated``` device has an added feature that it can tell when it is safet to operate the device. For example, a window many only open or close when it is safe to do so. In unsafe state, if the window is tried to close using the SDK, an exception is generated which which must be handelled by the user. Capabilities of a device can be queried using the capability functions (see below).
+A room can have many devices. A device has a type e.g., bulb, air conditioner, window, CD player, and is uniquely identified by its integer Device ID. A device can have many capabilities like ```CommandEnabled``` ```TextEnabled``` and ```SafetyRelated```. All devices can be powered on or off if they are currently online. A ```CommandEnabled``` device is capable of accepting numerical commands e.g., 0-n where each command is mapped to a certain functionality of the device. For example, a window is a command enabled device and accepts 2 commands for opening and closing respectively. A ```TextEnabled``` command is capable of returning human readable status messages e.g., the CD player can return the name of the current track being played. A ```SafetyRelated``` device has an added feature that it can tell when it is safet to operate the device. For example, a window many only open or close when it is safe to do so. In unsafe state, if the window is tried to close using the SDK, an exception is generated which must be handeled by the user. Capabilities of a device can be queried using the capability functions (see below).
 
 ### Paired Devices
-A device can have a set of associated devices such that, when we turn a device on or off, all associated devices are also turned on or off. This feature is useful in rooms like conference rooms or theathers where a user might want to turn off all lights together.
+A device can have a set of associated devices such that, when we turn a device on or off, all associated devices are also turned on or off. This feature is useful in rooms like conference rooms or theaters where a user might want to turn off all lights together.
 
 ## The C Style API
 The SDK can be used as a C Style API built on top of the OO code. For this, include the ```SmartHomeSDK.h``` header file available in the release. Once included, you can be invoke the functions exposed. The list and functionality of these functions is presented in the following text.
 
 ### Initialization and Dispose
-Initialization of the SDK essentially allocates the necessary resources for the current session e.g., a TCP/IP connection with the simualtor. The session must be closed e.g., on program exit by disposing the resources. The methods for initialization and dispose are presented as follows.
+Initialization of the SDK essentially allocates the necessary resources for the current session e.g., a TCP/IP connection with the simulator. The session must be closed e.g., on program exit by disposing the resources. The methods for initialization and dispose are presented as follows.
 
 ```c++
 /* initializes the required resource e.g., connection with the simulator */
@@ -130,7 +130,7 @@ bool SHAPI_ExecuteCommand(int deviceId, int commandId);
 ````
 
 ## Sample Program
-Using the functions presented above, we can write programs to control the Smart Home. For example the following program connects the simualtor, displays its name and performs various actions on the devices before exiting the program.
+Using the functions presented above, we can write programs to control the Smart Home. For example the following program connects the simulator, displays its name and performs various actions on the devices before exiting the program.
 
 ```c++
 #include <iostream>
