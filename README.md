@@ -23,6 +23,85 @@ A room can have many devices. A device has a type e.g., bulb, air conditioner, w
 ### Paired Devices
 A device can have a set of associated devices such that, when we turn a device on or off, all associated devices are also turned on or off. This feature is useful in rooms like conference rooms or theaters where a user might want to turn off all lights together.
 
+## Sample Program
+Using the functions presented above, we can write programs to control the Smart Home. For example the following program connects the simulator, displays its name and performs various actions on the devices before exiting the program.
+
+```c++
+#include <iostream>
+#include "SmartHomeSDK.h"
+
+using namespace std;
+
+int main()
+{	
+	//Smart Home API must be initialized before any calls
+	SHAPI_Initialize();
+
+	string name = SHAPI_GetBuildingName();
+	cout << name << "\n";
+
+	string status = SHAPI_GetTextStatus(19);
+	cout << status << "\n";
+	
+	vector<int>* ids = SHAPI_GetDevices(1,1);
+	cout << ids->size() << "\n";
+		
+	vector<int>* paired = SHAPI_GetPairedDevices(1);
+	cout << paired->size() << "\n";
+
+	bool onStatus = SHAPI_GetDevicePoweredOn(1);
+	if(onStatus)
+		cout << "True \n";
+	else
+		cout << "False \n";
+		
+	bool result = SHAPI_SetDevicePoweredOn(1, true);
+	if(result)
+		cout << "True \n";
+	else
+		cout << "False \n";
+		
+	//ask user to press enter before exiting
+	cout << "\nPress ENTER to continue...";	
+	cin.get();
+
+	//Smart Home API must be shutdown at the end of the execution
+	SHAPI_Dispose();
+}
+```
+
+## Compilation
+The SmartHomeSDK can be compiled both on Linux and Windows as 32-bit and 64-bit libraries. The provided Makefiles are tested on Ubuntu as well as on Windows 10 Ubuntu Bash Shell. Run the following commands.
+
+First lets ensure that we have necessary development tools installed.
+
+```bash
+sudo apt-get install make gcc g++
+```
+
+Next, we shall compile the shared object (SO) and package it with headers for release. The first command below cleans up any old build attempts. The second command performs the compilation of the library SDK as a shared object. The third command copies the required header files and creates the release package in the release folder.
+
+```bash
+make clean
+make
+make headers
+```
+
+Now we can test using the test program provided. First, make sure that the SmartHome Simulator is running. Then execute the following commands.
+
+```bash
+cd test
+make clean
+make
+./release/SmartHomeSDKTest.o
+```
+
+![Simulator Test](/build.png)
+
+The first of the above command changes the current directory to enter the test sub-directory. Then, we perform a clean operation to remove temporary files. After that, the ```make``` command compiles and links the test program into an executable. The output is created in the release folder, where the SO file is also copied for runtime loading. The last command executes the test program, which connects to the simulator and issues a few commands to power up a few devices as shown below.
+
+![Simulator Test](/simtest.png)
+
 ## The C Style API
 The SDK can be used as a C Style API built on top of the OO code. For this, include the ```SmartHomeSDK.h``` header file available in the release. Once included, you can be invoke the functions exposed. The list and functionality of these functions is presented in the following text.
 
@@ -128,53 +207,3 @@ int SHAPI_GetMaxCommandId(int deviceId);
 /* execute a command between 0 and max command id on the given command enabled device */
 bool SHAPI_ExecuteCommand(int deviceId, int commandId);
 ````
-
-## Sample Program
-Using the functions presented above, we can write programs to control the Smart Home. For example the following program connects the simulator, displays its name and performs various actions on the devices before exiting the program.
-
-```c++
-#include <iostream>
-#include "SmartHomeSDK.h"
-
-using namespace std;
-
-int main()
-{	
-	//Smart Home API must be initialized before any calls
-	SHAPI_Initialize();
-
-	string name = SHAPI_GetBuildingName();
-	cout << name << "\n";
-
-	string status = SHAPI_GetTextStatus(19);
-	cout << status << "\n";
-	
-	vector<int>* ids = SHAPI_GetDevices(1,1);
-	cout << ids->size() << "\n";
-		
-	vector<int>* paired = SHAPI_GetPairedDevices(1);
-	cout << paired->size() << "\n";
-
-	bool onStatus = SHAPI_GetDevicePoweredOn(1);
-	if(onStatus)
-		cout << "True \n";
-	else
-		cout << "False \n";
-		
-	bool result = SHAPI_SetDevicePoweredOn(1, true);
-	if(result)
-		cout << "True \n";
-	else
-		cout << "False \n";
-		
-	//ask user to press enter before exiting
-	cout << "\nPress ENTER to continue...";	
-	cin.get();
-
-	//Smart Home API must be shutdown at the end of the execution
-	SHAPI_Dispose();
-}
-```
-
-## Compilation
-The SmartHomeSDK can be compiled both on Linux and Windows as 32-bit and 64-bit libraries.
