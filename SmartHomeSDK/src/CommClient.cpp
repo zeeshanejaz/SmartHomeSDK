@@ -33,7 +33,7 @@ bool CommClient::Connect()
 	//explicitly close it to for invalidated.
 	if(!connected)
 	{	
-		clientSocket->close();
+		clientSocket->closeSocket();
 		throw new string("Unable to connect to the Smart Home Simulator.\nMake sure that the simulator is running.");
 	}
 
@@ -49,7 +49,7 @@ bool CommClient::IsConnected()
 
 void CommClient::Disconnect()
 {	
-	clientSocket->close();
+	clientSocket->closeSocket();
 	stopReaderThread();
 }
 

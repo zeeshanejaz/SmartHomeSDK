@@ -1,14 +1,14 @@
 CXX := g++
-CXXFLAGS := -Wall -O2
+CXXFLAGS := -Wall -O2 -fPIC
 CXXFLAGS += -std=c++0x
 
-LIBEXT := dll
+LIBEXT := so
 LIBNAME := SmartHomeSDK
 BUILDDIR := build
 OUTPUTDIR := release
-LIBS =
+LIBS = -lpthread
 TARGET := $(OUTPUTDIR)/$(LIBNAME).$(LIBEXT)
-LDFLAGS := -shared -Wl -lpthread
+LDFLAGS := -shared -lpthread
 SRCEXT := cpp
 HDREXT := h
 SRCDIR := src

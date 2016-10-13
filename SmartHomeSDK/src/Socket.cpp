@@ -15,10 +15,10 @@ Socket::Socket() :
 
 Socket::~Socket()
 {
-	close ();
+	closeSocket ();
 }
 
-void Socket::close()
+void Socket::closeSocket()
 {
   if ( is_valid() )
     ::close ( m_sock );
@@ -66,7 +66,7 @@ bool Socket::bind ( const int port )
   return true;
 }
 
-bool Socket::listen() const
+bool Socket::listen () const
 {
   if ( ! is_valid() )
     {

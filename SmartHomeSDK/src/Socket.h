@@ -1,3 +1,6 @@
+// Credit : The Linux Documentation Project (TLDP)
+// Source : http://tldp.org/LDP/LG/issue74/misc/tougher/Socket.h.txt
+
 #pragma once
 
 #ifndef __SOCKETDEFINITION__
@@ -36,7 +39,7 @@ class Socket
 
   // Client initialization
   bool connect ( const std::string host, const int port );
-  void close();
+  void closeSocket();
   
   // Data Transimission
   bool send ( const std::string ) const;

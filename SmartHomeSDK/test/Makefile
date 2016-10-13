@@ -3,9 +3,9 @@ OUTPUTDIR := release
 SRCEXT := cpp
 
 APPNAME := SmartHomeSDKTest
-APPEXT := exe
+APPEXT := o
 LIBNAME = SmartHomeSDK
-LIBEXT := dll
+LIBEXT := so
 LIBDIR := ../$(OUTPUTDIR)
 INCLDIR := ../$(OUTPUTDIR)
 
