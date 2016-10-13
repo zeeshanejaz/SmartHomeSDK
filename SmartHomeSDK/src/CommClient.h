@@ -19,7 +19,7 @@
 using namespace std;
 
 #define ServerAddress "127.0.0.1";
-#define ServerPort 9999;
+#define ServerPort 7878;
 
 
 class CommClient
