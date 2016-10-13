@@ -11,6 +11,7 @@
 #include <string>
 #include <tr1/functional>
 
+#include <sys/time.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
